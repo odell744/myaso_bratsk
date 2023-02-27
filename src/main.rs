@@ -3,9 +3,6 @@ use bevy_inspector_egui::quick::WorldInspectorPlugin;
 
 mod myaso; // main module of game )
 
-#[derive(Component)]
-pub struct Player;
-
 fn main()
 {
     App::new()
@@ -29,7 +26,7 @@ fn startup_system(mut commands: Commands, asset_server: Res<AssetServer>)
     commands.spawn((SpriteBundle {
         texture: asset_server.load("bro.png"),
         ..Default::default()
-    }, Player)); // here is PLAYER
+    })); // here is PLAYER
 }
 
 
