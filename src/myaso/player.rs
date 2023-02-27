@@ -3,7 +3,7 @@ use bevy::prelude::*;
 const LOCAL_ID: u32 = 0;
 const LOCAL_NAME: &str = "player_local";
 const PLAYER_SPEED: f32 = 100.0;
-const SMOOTH_CAMERA_SPEED: f32 = 0.1;
+const SMOOTH_CAMERA_SPEED: f32 = 0.9;
 // component to indicate Player with ID
 #[derive(Component)]
 pub struct Player
@@ -97,7 +97,8 @@ fn player_move(
 }
 
 fn player_camera_follow(
-    mut set: ParamSet<(Query<&mut Transform, With<Player>>, Query<&mut Transform, With<Camera>>)>
+    mut set: ParamSet<(Query<&mut Transform, With<Player>>, Query<&mut Transform, With<Camera>>)>,
+    time: Res<Time>
 )
 {
     let mut p_query: Vec3 = Vec3::new(0.0, 0.0, 0.0);
@@ -107,7 +108,7 @@ fn player_camera_follow(
     }
     for mut cam_pos in set.p1().iter_mut()
     {
-        cam_pos.translation = cam_pos.translation.lerp(p_query, SMOOTH_CAMERA_SPEED);
+        cam_pos.translation = cam_pos.translation.lerp(p_query, SMOOTH_CAMERA_SPEED * time.delta_seconds());
     }
     
 }
