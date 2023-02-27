@@ -1,0 +1,8 @@
+[package]
+name = "myaso_bratsk"
+version = "0.0.1"
+edition = "2023"
+
+[dependencies]
+bevy = { version = "0.9.1", features = ["dynamic", "jpeg"] }
+bevy-inspector-egui = "0.17.0"
